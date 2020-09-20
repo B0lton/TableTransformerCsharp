@@ -20,6 +20,15 @@ namespace TransformerTool
     /// <typeparam name="T">T è il tipo del/degli oggetto/i che si vuole/vogliono ottenere</typeparam>
     public class Transformer<T>
     {
+        private string defaultValueString = string.Empty;
+        private Int16 defaultValueInt16 = 0;
+        private Int32 defaultValueInt32 = 0;
+        private Int64 defaultValueInt64 = 0;
+        private decimal defaultValueDecimal = decimal.Zero;
+        private double defaultValueDouble = 0;
+        private float defaultValueFloat = 0;
+        private DateTime defaultValueDateTime = DateTime.MinValue;
+
         public List<T> Transform(DataTable _dataTable)
         {
             List<T> risultato = new List<T>();
@@ -97,49 +106,49 @@ namespace TransformerTool
                     if(record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, record[nomeCampo].ToString());
                     else
-                        proprietàDaSettare.SetValue(istanza, string.Empty);
+                        proprietàDaSettare.SetValue(istanza, defaultValueString);
                     break;
                 case "int16":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToInt16(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0 as Int16);
+                        proprietàDaSettare.SetValue(istanza, defaultValueInt16);
                     break;
                 case "int32":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToInt32(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0 as Int32);
+                        proprietàDaSettare.SetValue(istanza, defaultValueInt32);
                     break;
                 case "int64":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToInt64(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0 as Int64);
+                        proprietàDaSettare.SetValue(istanza, defaultValueInt64);
                     break;
                 case "decimal":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToDecimal(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, Decimal.Zero);
+                        proprietàDaSettare.SetValue(istanza, defaultValueDecimal);
                     break;
                 case "double":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToDouble(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0);
+                        proprietàDaSettare.SetValue(istanza, defaultValueDouble);
                     break;
                 case "float":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToSingle(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0);
+                        proprietàDaSettare.SetValue(istanza, defaultValueFloat);
                     break;
                 case "datetime":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToDateTime(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, DateTime.MinValue);
+                        proprietàDaSettare.SetValue(istanza, defaultValueDateTime);
                     break;
                 default:
                     break;
