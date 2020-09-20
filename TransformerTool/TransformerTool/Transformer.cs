@@ -103,19 +103,19 @@ namespace TransformerTool
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToInt16(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0);
+                        proprietàDaSettare.SetValue(istanza, 0 as Int16);
                     break;
                 case "int32":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToInt32(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0);
+                        proprietàDaSettare.SetValue(istanza, 0 as Int32);
                     break;
                 case "int64":
                     if (record[nomeCampo] != DBNull.Value)
                         proprietàDaSettare.SetValue(istanza, Convert.ToInt64(record[nomeCampo]));
                     else
-                        proprietàDaSettare.SetValue(istanza, 0);
+                        proprietàDaSettare.SetValue(istanza, 0 as Int64);
                     break;
                 case "decimal":
                     if (record[nomeCampo] != DBNull.Value)
