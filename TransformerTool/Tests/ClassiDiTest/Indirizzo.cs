@@ -8,5 +8,6 @@ namespace Tests.ClassiDiTest
     {
         public string Via { get; set; }
         public int NumeroCivico { get; set; }
+        public Paese Paese { get; set; }
     }
 }

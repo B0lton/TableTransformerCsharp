@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace TransformerTool
 {
+    /// <summary>
+    /// Classe che permette di trasformare automaticamente il risultato di una query salvato in una datatable, in oggetti di classi inizializzati in base ai record
+    /// della datatable i cui campi sono le proprietà delle classi. L'unico requisito affinchè funzioni è che se, per esempio, una classe A ha come proprietà un riferimento
+    /// ad un'altra classe B allora si procede così:
+    /// Classe A (Proprietà Nome, Proprietà B)
+    /// Classe B (Proprietà Codice)
+    /// Allora, se si vuole settare il Codice della classe B, nell'elenco di selezione della query, questo campo si dovrà scrivere "B.Codice"
+    /// </summary>
+    /// <typeparam name="T">T è il tipo del/degli oggetto/i che si vuole/vogliono ottenere</typeparam>
     public class Transformer<T>
     {
         public List<T> Transform(DataTable _dataTable)
@@ -15,7 +23,6 @@ namespace TransformerTool
             foreach (DataRow record in _dataTable.Rows)
             {
                 T istanza = Activator.CreateInstance<T>();
-
                 foreach (DataColumn campo in _dataTable.Columns)
                 {
                     //Se nel nome campo troviamo una cosa come: Proprietario.Nome , vuol dire che 
@@ -35,17 +42,13 @@ namespace TransformerTool
                                 isProprietàTipoNonPrimitivo = true;
                                 break;
                             }
-
                             oggettoInCuiRicercareLaProprietà = this.GetOggettoSottolivello(oggettoInCuiRicercareLaProprietà, nomeProprietà);
-
                             index++;
                         }
-                        
                     }
 
                     if(!isProprietàTipoNonPrimitivo)
                     this.SettaProprietàPrimitiva(istanza, campo.ColumnName,campo.ColumnName, record);
-
                 }
 
                 risultato.Add(istanza);
