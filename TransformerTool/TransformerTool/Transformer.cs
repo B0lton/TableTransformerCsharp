@@ -13,6 +13,9 @@ namespace TransformerTool
     /// Classe A (Proprietà Nome, Proprietà B)
     /// Classe B (Proprietà Codice)
     /// Allora, se si vuole settare il Codice della classe B, nell'elenco di selezione della query, questo campo si dovrà scrivere "B.Codice"
+    /// 
+    /// ----------------------------
+    /// Credits to @Alessandro Zuccolo
     /// </summary>
     /// <typeparam name="T">T è il tipo del/degli oggetto/i che si vuole/vogliono ottenere</typeparam>
     public class Transformer<T>
