@@ -88,28 +88,52 @@ namespace TransformerTool
             switch (nomeTipoProprietàDaSettare)
             {
                 case "string":
-                    proprietàDaSettare.SetValue(istanza, record[nomeCampo].ToString());
+                    if(record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, record[nomeCampo].ToString());
+                    else
+                        proprietàDaSettare.SetValue(istanza, string.Empty);
                     break;
                 case "int16":
-                    proprietàDaSettare.SetValue(istanza, Convert.ToInt16(record[nomeCampo]));
+                    if (record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, Convert.ToInt16(record[nomeCampo]));
+                    else
+                        proprietàDaSettare.SetValue(istanza, 0);
                     break;
                 case "int32":
-                    proprietàDaSettare.SetValue(istanza, Convert.ToInt32(record[nomeCampo]));
+                    if (record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, Convert.ToInt32(record[nomeCampo]));
+                    else
+                        proprietàDaSettare.SetValue(istanza, 0);
                     break;
                 case "int64":
-                    proprietàDaSettare.SetValue(istanza, Convert.ToInt64(record[nomeCampo]));
+                    if (record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, Convert.ToInt64(record[nomeCampo]));
+                    else
+                        proprietàDaSettare.SetValue(istanza, 0);
                     break;
                 case "decimal":
-                    proprietàDaSettare.SetValue(istanza, Convert.ToDecimal(record[nomeCampo]));
+                    if (record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, Convert.ToDecimal(record[nomeCampo]));
+                    else
+                        proprietàDaSettare.SetValue(istanza, Decimal.Zero);
                     break;
                 case "double":
-                    proprietàDaSettare.SetValue(istanza, Convert.ToDouble(record[nomeCampo]));
+                    if (record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, Convert.ToDouble(record[nomeCampo]));
+                    else
+                        proprietàDaSettare.SetValue(istanza, 0);
                     break;
                 case "float":
-                    proprietàDaSettare.SetValue(istanza, Convert.ToSingle(record[nomeCampo]));
+                    if (record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, Convert.ToSingle(record[nomeCampo]));
+                    else
+                        proprietàDaSettare.SetValue(istanza, 0);
                     break;
                 case "datetime":
-                    proprietàDaSettare.SetValue(istanza, Convert.ToDateTime(record[nomeCampo]));
+                    if (record[nomeCampo] != DBNull.Value)
+                        proprietàDaSettare.SetValue(istanza, Convert.ToDateTime(record[nomeCampo]));
+                    else
+                        proprietàDaSettare.SetValue(istanza, DateTime.MinValue);
                     break;
                 default:
                     break;
