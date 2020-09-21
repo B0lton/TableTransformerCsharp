@@ -10,6 +10,6 @@ namespace Tests.ClassiDiTest
         public DateTime DataAsp { get; set; }
         public string CittàDestinatario { get; set; }
         public string CittàPartenza { get; set; }
-        public decimal QuantitàTotale { get; set; }
+        public int QuantitàTotale { get; set; }
     }
 }
