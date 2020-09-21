@@ -21,8 +21,8 @@ namespace Tests
             row["DataImmatricolazione"] = DateTime.Now;
             dt.Rows.Add(row);
 
-            Transformer<Automobile> t = new Transformer<Automobile>();
-            List<Automobile> risultato = t.Transform(dt);
+            Transformer t = new Transformer();
+            List<Automobile> risultato = t.Transform<Automobile>(dt);
 
             Assert.AreEqual(risultato[0].Targa, "aaa");
             Assert.AreEqual(risultato[0].NumeroPorte, 3);
@@ -42,8 +42,8 @@ namespace Tests
             row["Proprietario.Nome"] = "Alessandro Zuccolo";
             dt.Rows.Add(row);
 
-            Transformer<Automobile> t = new Transformer<Automobile>();
-            List<Automobile> risultato = t.Transform(dt);
+            Transformer t = new Transformer();
+            List<Automobile> risultato = t.Transform<Automobile>(dt);
 
             Assert.AreEqual("aaa",risultato[0].Targa);
             Assert.AreEqual(3, risultato[0].NumeroPorte);
@@ -66,8 +66,8 @@ namespace Tests
             row["Proprietario.Indirizzo.NumeroCivico"] = 7;
             dt.Rows.Add(row);
 
-            Transformer<Automobile> t = new Transformer<Automobile>();
-            List<Automobile> risultato = t.Transform(dt);
+            Transformer t = new Transformer();
+            List<Automobile> risultato = t.Transform<Automobile>(dt);
 
             Assert.AreEqual("aaa", risultato[0].Targa);
             Assert.AreEqual(3, risultato[0].NumeroPorte);
@@ -94,8 +94,8 @@ namespace Tests
             row["Proprietario.Indirizzo.Paese.CodicePostale"] = 27029;
             dt.Rows.Add(row);
 
-            Transformer<Automobile> t = new Transformer<Automobile>();
-            List<Automobile> risultato = t.Transform(dt);
+            Transformer t = new Transformer();
+            List<Automobile> risultato = t.Transform<Automobile>(dt);
 
             Assert.AreEqual("aaa", risultato[0].Targa);
             Assert.AreEqual(3, risultato[0].NumeroPorte);

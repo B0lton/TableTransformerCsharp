@@ -37,8 +37,8 @@ namespace Tests
             dataTable.Load(reader);
             connection.Close();
 
-            Transformer<Spedizione> transformer = new Transformer<Spedizione>();
-            List<Spedizione> risultato = transformer.Transform(dataTable);
+            Transformer transformer = new Transformer();
+            List<Spedizione> risultato = transformer.Transform<Spedizione>(dataTable);
 
             Assert.IsNotNull(risultato);
             Assert.IsTrue(risultato.Count > 0);

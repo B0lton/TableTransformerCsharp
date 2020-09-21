@@ -17,11 +17,15 @@ namespace TransformerTool
     /// ----------------------------
     /// Credits to @Alessandro Zuccolo
     /// </summary>
-    /// <typeparam name="T">T è il tipo del/degli oggetto/i che si vuole/vogliono ottenere</typeparam>
-    public class Transformer<T>
+    public class Transformer
     {
-
-        public List<T> Transform(DataTable _dataTable)
+        /// <summary>
+        /// Metodo che trasforma una datatable in oggetti, tipizzati di una classe indicata, per poter essere elaborati
+        /// </summary>
+        /// <typeparam name="T">T è la classe di cui vogliamo ottenere la trasformazione dalla datatable</typeparam>
+        /// <param name="_dataTable">La datatable da trasformare contenente il risultato di una query</param>
+        /// <returns>Una lista di oggetti trasformati nella classe indicata. NOTA: ritorna comunque una lista anche in caso di un solo record</returns>
+        public List<T> Transform<T>(DataTable _dataTable)
         {
             List<T> risultato = new List<T>();
             foreach (DataRow record in _dataTable.Rows)
@@ -74,6 +78,7 @@ namespace TransformerTool
         {
             //Questa ricerca della proprietà rende case insensitive la ricerca; ciò è molto utile perchè basta scrivere le proprietà uguali ai campi senza doversi preoccupare di maiuscole o minuscole
             PropertyInfo proprietàDaSettare = oggettoInCuiRicercareLaProprietà.GetType().GetProperties().SingleOrDefault(x => x.Name.Equals(nomeProprietà, StringComparison.InvariantCultureIgnoreCase));
+            this.PropertyNullControl(proprietàDaSettare, nomeProprietà, oggettoInCuiRicercareLaProprietà);
             Type t = proprietàDaSettare.PropertyType;
             if (proprietàDaSettare.GetValue(oggettoInCuiRicercareLaProprietà) == null)
             {
@@ -92,10 +97,18 @@ namespace TransformerTool
         private void SettaProprietàPrimitiva(object istanza,string nomeProprietà,string nomeCampo,DataRow record)
         {
             PropertyInfo proprietàDaSettare = istanza.GetType().GetProperty(nomeProprietà);
+            this.PropertyNullControl(proprietàDaSettare, nomeProprietà, istanza);
+
             if(record[nomeCampo] != DBNull.Value)
                 proprietàDaSettare.SetValue(istanza, Convert.ChangeType(record[nomeCampo], record[nomeCampo].GetType()));
             else
                 proprietàDaSettare.SetValue(istanza, Activator.CreateInstance(proprietàDaSettare.PropertyType));
+        }
+
+        private void PropertyNullControl(PropertyInfo proprietà,string nomeProprietà,object oggettoContenenteLaProprietà)
+        {
+            if (proprietà == null)
+                throw new NullReferenceException($"Nessuna proprietà di nome {nomeProprietà} trovata all'interno della classe {oggettoContenenteLaProprietà.GetType().Name}");
         }
     }
 }
